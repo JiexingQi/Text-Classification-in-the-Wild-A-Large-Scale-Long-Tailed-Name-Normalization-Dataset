@@ -68,6 +68,7 @@ As same as train file, every line in these files is a mapping, it is organized b
 [first_institution_name]\t\t[second_institution_name]\t\t[label]
 ```
 label=0 means first_institution_name and second_institution_name is not the same institution, 
+
 label=1 means first_institution_name and second_institution_name is the same institution. 
 + sample 
 ```
@@ -93,6 +94,7 @@ every line in this file is a triplet, it is organized by
 [original_name]\t\t[normalized_name]\t\t[label]
 ```
 label=0 means it is an institution in train set, 
+
 label=1 means it is an institution in train set(in open set).
 + sample
 ```
