@@ -107,6 +107,7 @@ department of surgery, university of nevada las vegas medicine, las vegas, nv.		
 [first_institution_name]\t\t[second_institution_name]\t\t[label]
 ```
 label=0 means first_institution_name and second_institution_name is not the same institution, 
+
 label=1 means first_institution_name and second_institution_name is the same institution. 
 + sample 
 ```
