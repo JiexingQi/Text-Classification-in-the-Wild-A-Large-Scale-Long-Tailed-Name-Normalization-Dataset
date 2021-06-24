@@ -10,6 +10,8 @@ There are four directorys here in this project. They are:
 + **src**: The code directory
 
 
+
+
 ## Quick Start
 To run our code. The overall process is as follows:
 1. Proper configuration of project information. That is, configure which mode(cpu/single gpu/multiple gpus) you will you use in src/cs/\__init\__.py file(cs means common setting). 
@@ -119,3 +121,5 @@ from tasks.masked_lm.train import train
 # from tasks.bert_classifier.train import train
 # from tasks.bert_metric.train import train
 ```
+
+**Note**: all pkl used in code can be avaliable in https://drive.google.com/drive/folders/1J3oL3EZm9Idzy4Ij611fbk_T6qoc8Cn-?usp=sharing.
