@@ -78,10 +78,10 @@ def bert_metric_validation(model):
         cls_size[label] = nor2len[id2nor[aff_id]]
 
     r = _calc_split(5, 20, true, pred, cls_size)
-    report_text = f'全A({r[0]:.1f}%) 全P({r[1]:.1f}%) 全R({r[2]:.1f}%) 全F({r[3]:.1f}%) ' \
-                  f'大A({r[4]:.1f}%) 大P({r[5]:.1f}%) 大R({r[6]:.1f}%) 大F({r[7]:.1f}%) ' \
-                  f'中A({r[8]:.1f}%) 中P({r[9]:.1f}%) 中R({r[10]:.1f}%) 中F({r[11]:.1f}%) ' \
-                  f'小A({r[12]:.1f}%) 小P({r[13]:.1f}%) 小R({r[14]:.1f}%) 小F({r[15]:.1f}%)'
+    report_text = f'Overall A({r[0]:.1f}%) Overall P({r[1]:.1f}%) Overall R({r[2]:.1f}%) Overall F({r[3]:.1f}%) ' \
+                  f'Many A({r[4]:.1f}%) Many P({r[5]:.1f}%) Many R({r[6]:.1f}%) Many F({r[7]:.1f}%) ' \
+                  f'Medium A({r[8]:.1f}%) Medium P({r[9]:.1f}%) Medium R({r[10]:.1f}%) Medium F({r[11]:.1f}%) ' \
+                  f'Few A({r[12]:.1f}%) Few P({r[13]:.1f}%) Few R({r[14]:.1f}%) Few F({r[15]:.1f}%)'
     return (report_text, r)
 
 
@@ -130,10 +130,10 @@ def bert_metric_test(model):
         cls_size[label] = nor2len[id2nor[aff_id]]
 
     r = _calc_split(5, 20, true, pred, cls_size)
-    report_text = f'全A({r[0]:.1f}%) 全P({r[1]:.1f}%) 全R({r[2]:.1f}%) 全F({r[3]:.1f}%) ' \
-                  f'大A({r[4]:.1f}%) 大P({r[5]:.1f}%) 大R({r[6]:.1f}%) 大F({r[7]:.1f}%) ' \
-                  f'中A({r[8]:.1f}%) 中P({r[9]:.1f}%) 中R({r[10]:.1f}%) 中F({r[11]:.1f}%) ' \
-                  f'小A({r[12]:.1f}%) 小P({r[13]:.1f}%) 小R({r[14]:.1f}%) 小F({r[15]:.1f}%)'
+    report_text = f'Overall A({r[0]:.1f}%) Overall P({r[1]:.1f}%) Overall R({r[2]:.1f}%) Overall F({r[3]:.1f}%) ' \
+                  f'Many A({r[4]:.1f}%) Many P({r[5]:.1f}%) Many R({r[6]:.1f}%) Many F({r[7]:.1f}%) ' \
+                  f'Medium A({r[8]:.1f}%) Medium P({r[9]:.1f}%) Medium R({r[10]:.1f}%) Medium F({r[11]:.1f}%) ' \
+                  f'Few A({r[12]:.1f}%) Few P({r[13]:.1f}%) Few R({r[14]:.1f}%) Few F({r[15]:.1f}%)'
     return (report_text, r)
 
 

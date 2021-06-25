@@ -53,18 +53,18 @@ model_conf = AnnBertConfig(
 # ==================================================================================================
 # Dataset Config
 
-dataset_name = '210422'
-training_set_file = f'/home/datamerge/ACL/Data/{dataset_name}/train/remain_train.pkl'
-val_set_file = f'/home/datamerge/ACL/Data/{dataset_name}/dev/dev.pkl'
-test_set_file = f'/home/datamerge/ACL/Data/{dataset_name}/test/test.pkl'
+# dataset_name = '210422'
+training_set_file = cs.save_pkl_root + 'remain_train.pkl'
+val_set_file = cs.save_pkl_root + 'dev.pkl'
+test_set_file = cs.save_pkl_root + 'test.pkl'
 id_to_cls_file = f'{cs.DATASET_DIR}/id_to_cls.pkl'
-nor2len_file = f'/home/datamerge/ACL/Data/{dataset_name}/pkl/{dataset_name}_nor2len_dict.pkl'
-aff_id_to_nor_file = f'/home/datamerge/ACL/Data/{dataset_name}/pkl/afid2nor.pkl'
+nor2len_file = cs.save_pkl_root + '210422_nor2len_dict.pkl'
+aff_id_to_nor_file = cs.save_pkl_root + 'afid2nor.pkl'
 manager_host = '10.10.10.3'
 manager_port = 50003
 manager_password = b'something'
 
-anchors_file = f'/home/datamerge/ACL/Data/{dataset_name}/pkl/anchor.pkl'
+anchors_file = cs.save_pkl_root + 'anchor.pkl'
 # anchors_file = os.path.join(cs.DATASET_DIR, dataset_name, 'anchors.pkl')
 
 

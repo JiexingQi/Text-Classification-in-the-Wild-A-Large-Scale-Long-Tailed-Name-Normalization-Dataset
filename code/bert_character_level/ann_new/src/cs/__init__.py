@@ -50,14 +50,14 @@ elif device_mode == 'distributed':
     use_cuda = True
     use_dist = True
 
-    tcp_url = 'tcp://10.10.10.11:23457'  # It must be the first GPU's IP address, arbitrary port value
+    tcp_url = 'tcp://10.10.10.12:23457'  # It must be the first GPU's IP address, arbitrary port value
     os.environ['NCCL_SOCKET_IFNAME'] = 'eno1'  
 
     workers = [
-        {'hostname': 'main-server-11', 'device_id': 0},
-        {'hostname': 'main-server-11', 'device_id': 1},
-        {'hostname': 'main-server-11', 'device_id': 2},
-        {'hostname': 'main-server-11', 'device_id': 3},
+        {'hostname': 'main-server-12', 'device_id': 0},
+        {'hostname': 'main-server-12', 'device_id': 1},
+        {'hostname': 'main-server-12', 'device_id': 2},
+        {'hostname': 'main-server-12', 'device_id': 3},
     ]
     num_devices = len(workers)
     assert num_devices > 1
@@ -76,3 +76,9 @@ elif device_mode == 'distributed':
     local_rank = None
 else:
     raise Exception('Wrong device mode.')
+
+
+# ==================================================================================================
+# pkl path
+
+save_pkl_root = ''

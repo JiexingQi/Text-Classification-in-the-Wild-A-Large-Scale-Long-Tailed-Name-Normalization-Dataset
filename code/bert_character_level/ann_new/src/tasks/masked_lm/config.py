@@ -48,7 +48,7 @@ model_conf = AnnBertConfig(
 # ==================================================================================================
 # Dataset Config
 
-corpus_file = 'corpus.pkl'
+corpus_file = cs.save_pkl_root + 'corpus.pkl'
 manager_host = '10.10.10.8'
 manager_port = 50009
 manager_password = b'something'

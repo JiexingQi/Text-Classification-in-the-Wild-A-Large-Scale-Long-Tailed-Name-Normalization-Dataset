@@ -8,6 +8,7 @@ from tools.utils import get_test_set_loader
 from tqdm import tqdm
 from tools.utils import to_device
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from .config import id_to_cls_file
 
 
 def bert_classifier_inference(
@@ -99,15 +100,11 @@ def bert_classifier_test_detail(model, test_set=None):
         test_set = get_test_set(part='test')
     dataloader = get_test_set_loader(test_set, batch_size=256, num_workers=2)
     
-    id_to_cls = pickle.load(open('/home/jxqi/ACL/experiment/ann/dataset/id_to_cls.pkl', 'rb'))
+    id_to_cls = pickle.load(open(id_to_cls_file, 'rb'))
     cls_to_id = { v:k for k,v in id_to_cls.items() }
-    save_pkl_root = '/home/datamerge/ACL/Data/210422/pkl/'
-    afid2nor = pickle.load(open(save_pkl_root+"afid2nor.pkl", "rb"))
-    nor2afid = pickle.load(open(save_pkl_root+"nor2afid.pkl", "rb"))
-    nor2len_dict = pickle.load(open(save_pkl_root+'210422_nor2len_dict.pkl', 'rb'))
+    afid2nor = pickle.load(open(cs.save_pkl_root+"afid2nor.pkl", "rb"))
+    nor2len_dict = pickle.load(open(cs.save_pkl_root+'210422_nor2len_dict.pkl', 'rb'))
 
-    tp = 0
-    total = 0
     true = []
     pred = []
     test_set_size = []
@@ -115,8 +112,6 @@ def bert_classifier_test_detail(model, test_set=None):
     for char_ids, mask, char_position_ids, word_position_ids, labels in tqdm(dataloader):
         labels = labels.to(cs.device)
         results = bert_classifier_predict(model, char_ids, mask, char_position_ids, word_position_ids)
-        tp += torch.eq(results, labels).sum()
-        total += labels.size(0)
         
         tmp_test_size = [nor2len_dict[afid2nor[cls_to_id[label_id.item()]]]  for label_id in labels]
         test_set_size = test_set_size + tmp_test_size
@@ -169,12 +164,10 @@ def bert_classifier_test_detail_result(model, test_set=None):
         test_set = get_test_set(part='test')
     dataloader = get_test_set_loader(test_set, batch_size=256, num_workers=2)
     
-    id_to_cls = pickle.load(open('/home/jxqi/ACL/experiment/ann/dataset/id_to_cls.pkl', 'rb'))
+    id_to_cls = pickle.load(open(id_to_cls_file, 'rb'))
     cls_to_id = { v:k for k,v in id_to_cls.items() }
-    save_pkl_root = '/home/datamerge/ACL/Data/210422/pkl/'
-    afid2nor = pickle.load(open(save_pkl_root+"afid2nor.pkl", "rb"))
-    nor2afid = pickle.load(open(save_pkl_root+"nor2afid.pkl", "rb"))
-    nor2len_dict = pickle.load(open(save_pkl_root+'210422_nor2len_dict.pkl', 'rb'))
+    afid2nor = pickle.load(open(cs.save_pkl_root+"afid2nor.pkl", "rb"))
+    nor2len_dict = pickle.load(open(cs.save_pkl_root+'210422_nor2len_dict.pkl', 'rb'))
 
     tp = 0
     total = 0
@@ -240,9 +233,6 @@ def bert_classifier_test_overall(model, test_set=None):
     elif test_set == 'test':
         test_set = get_test_set(part='test')
     dataloader = get_test_set_loader(test_set, batch_size=256, num_workers=2)
-    
-    id_to_cls = pickle.load(open('/home/jxqi/ACL/experiment/ann/dataset/id_to_cls.pkl', 'rb'))
-    cls_to_id = { v:k for k,v in id_to_cls.items() }
 
     true = []
     pred = []

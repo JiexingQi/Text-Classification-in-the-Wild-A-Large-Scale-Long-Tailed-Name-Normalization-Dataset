@@ -82,9 +82,7 @@ def get_osc_set(dataset_file):
     with open(config.id_to_cls_file, 'rb') as f:
         id_to_cls = pickle.load(f)
         
-    save_pkl_root = '/home/datamerge/ACL/Data/210422/pkl/'
-    afid2nor = pickle.load(open(save_pkl_root+"afid2nor.pkl", "rb"))
-    nor2afid = pickle.load(open(save_pkl_root+"nor2afid.pkl", "rb"))
+    nor2afid = pickle.load(open(cs.save_pkl_root+"nor2afid.pkl", "rb"))
     
     texts = []
     labels = []
@@ -106,12 +104,6 @@ def get_osc_set(dataset_file):
 
 def get_osv_set(dataset_file):
     tokenizer = AnnTokenizer(cs.VOCAB_FILE)
-    with open(config.id_to_cls_file, 'rb') as f:
-        id_to_cls = pickle.load(f)
-        
-    save_pkl_root = '/home/datamerge/ACL/Data/210422/pkl/'
-    afid2nor = pickle.load(open(save_pkl_root+"afid2nor.pkl", "rb"))
-    nor2afid = pickle.load(open(save_pkl_root+"nor2afid.pkl", "rb"))
     
     texts_first = []
     texts_second = []

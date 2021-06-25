@@ -179,10 +179,9 @@ def train():
         num_workers=config.dataloader_workers
     )
     
-    save_pkl_root = '/home/datamerge/ACL/Data/210422/pkl/'
-    nor2len_train_part_dict = pickle.load(open(save_pkl_root+'nor2len_train_part_dict.pkl', 'rb'))
-    afid2nor = pickle.load(open(save_pkl_root+"afid2nor.pkl", "rb"))
-    id_to_cls = pickle.load(open('/home/jxqi/ACL/experiment/ann/dataset/id_to_cls.pkl', 'rb'))
+    nor2len_train_part_dict = pickle.load(open(cs.save_pkl_root+'nor2len_train_part_dict.pkl', 'rb'))
+    afid2nor = pickle.load(open(cs.save_pkl_root+"afid2nor.pkl", "rb"))
+    id_to_cls = pickle.load(open(config.id_to_cls_file, 'rb'))
     cls_to_id = { v:k for k,v in id_to_cls.items() }
     weights = [(1./nor2len_train_part_dict[afid2nor[cls_to_id[i]]])**(config.reweight_exp) for i in range(len(cls_to_id))]
     weights = torch.tensor(weights).to(torch.device("cuda"))

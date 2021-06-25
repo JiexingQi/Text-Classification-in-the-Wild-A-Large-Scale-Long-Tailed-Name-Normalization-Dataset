@@ -9,6 +9,7 @@ from tools.utils import get_test_set_loader
 from tqdm import tqdm
 from tools.utils import to_device
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from .config import id_to_cls_file
 
 
 def bert_classifier_inference(
@@ -100,12 +101,10 @@ def bert_classifier_test_detail(model, test_set=None):
         test_set = get_test_set(part='test')
     dataloader = get_test_set_loader(test_set, batch_size=256, num_workers=2)
     
-    id_to_cls = pickle.load(open('/home/jxqi/ACL/experiment/ann/dataset/id_to_cls.pkl', 'rb'))
+    id_to_cls = pickle.load(open(id_to_cls_file, 'rb'))
     cls_to_id = { v:k for k,v in id_to_cls.items() }
-    save_pkl_root = '/home/datamerge/ACL/Data/210422/pkl/'
-    afid2nor = pickle.load(open(save_pkl_root+"afid2nor.pkl", "rb"))
-    nor2afid = pickle.load(open(save_pkl_root+"nor2afid.pkl", "rb"))
-    nor2len_dict = pickle.load(open(save_pkl_root+'210422_nor2len_dict.pkl', 'rb'))
+    afid2nor = pickle.load(open(cs.save_pkl_root+"afid2nor.pkl", "rb"))
+    nor2len_dict = pickle.load(open(cs.save_pkl_root+'210422_nor2len_dict.pkl', 'rb'))
 
     tp = 0
     total = 0
@@ -170,12 +169,10 @@ def bert_classifier_test_detail_result(model, test_set=None):
         test_set = get_test_set(part='test')
     dataloader = get_test_set_loader(test_set, batch_size=256, num_workers=2)
     
-    id_to_cls = pickle.load(open('/home/jxqi/ACL/experiment/ann/dataset/id_to_cls.pkl', 'rb'))
+    id_to_cls = pickle.load(open(id_to_cls_file, 'rb'))
     cls_to_id = { v:k for k,v in id_to_cls.items() }
-    save_pkl_root = '/home/datamerge/ACL/Data/210422/pkl/'
-    afid2nor = pickle.load(open(save_pkl_root+"afid2nor.pkl", "rb"))
-    nor2afid = pickle.load(open(save_pkl_root+"nor2afid.pkl", "rb"))
-    nor2len_dict = pickle.load(open(save_pkl_root+'210422_nor2len_dict.pkl', 'rb'))
+    afid2nor = pickle.load(open(cs.save_pkl_root+"afid2nor.pkl", "rb"))
+    nor2len_dict = pickle.load(open(cs.save_pkl_root+'210422_nor2len_dict.pkl', 'rb'))
 
     tp = 0
     total = 0
@@ -241,13 +238,7 @@ def bert_classifier_test_overall(model, test_set=None):
     elif test_set == 'test':
         test_set = get_test_set(part='test')
     dataloader = get_test_set_loader(test_set, batch_size=256, num_workers=2)
-    
-    id_to_cls = pickle.load(open('/home/jxqi/ACL/experiment/ann/dataset/id_to_cls.pkl', 'rb'))
-    cls_to_id = { v:k for k,v in id_to_cls.items() }
 
-
-    tp = 0
-    total = 0
     true = []
     pred = []
     
@@ -276,20 +267,15 @@ def bert_classifier_test_overall(model, test_set=None):
 
 def bert_classifier_predict_new(model, test_set):
     '''
-    该函数实现以下功能：
-        给定一组输入机构名，给出模型判定的结果和概率
+    This function implements the following functions:
+        Input: a set of institution names
+        Output: the result and its probability of the model predicted
     '''
     model = to_device(model)
     model.eval()
 
     dataloader = get_test_set_loader(test_set, batch_size=256, num_workers=2)
     
-    id_to_cls = pickle.load(open('/home/jxqi/ACL/experiment/ann/dataset/id_to_cls.pkl', 'rb'))
-    cls_to_id = { v:k for k,v in id_to_cls.items() }
-
-
-    tp = 0
-    total = 0
     true = []
     pred = []
     prob = []
@@ -318,8 +304,9 @@ def bert_classifier_predict_new(model, test_set):
 
 def bert_classifier_predict_probs(model, test_set):
     '''
-    该函数实现以下功能：
-        给定一组输入机构名，给出模型判定的结果概率
+    This function implements the following functions:
+        Input: a set of institution names
+        Output: the probability of every class which the model predicted
     '''
     model = to_device(model)
     model.eval()
