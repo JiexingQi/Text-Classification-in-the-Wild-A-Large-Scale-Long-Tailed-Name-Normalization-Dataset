@@ -62,3 +62,10 @@ You can set the model which you want to evaluate.
 **evaluate_osv.ipynb** is the implementation for evaluating a model's perfomance for OSV task.
 
 You can set the model which you want to evaluate.
+
+
+# Requirements
+Suggested environment to run the code:
+
++ Ubuntu 18.04.02
++ pytorch 1.7.1
