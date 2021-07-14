@@ -123,3 +123,8 @@ from tasks.masked_lm.train import train
 ```
 
 **Note**: all pkl files used in code can be avaliable in https://drive.google.com/drive/folders/1J3oL3EZm9Idzy4Ij611fbk_T6qoc8Cn-?usp=sharing.
+
+# Requirements
+Suggested environment to run the code:
++ Ubuntu 18.04.02
++ pytorch 1.7.1
