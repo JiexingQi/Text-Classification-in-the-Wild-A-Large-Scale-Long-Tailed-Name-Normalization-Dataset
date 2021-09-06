@@ -6,14 +6,12 @@ BERT-based method including three methods shown in our paper. They are:
 
 The implementation for this are briefly introduced as follows:
 
-## Fine-tune with resampling/reweighting strategy
-**train.py** is the main file for fine-tune. It can be used by setting some parameters easily. It is listed as follows:
+## Fine-tune with resampling strategy
+**Original/fine_tune.py** is the main file for fine-tune. It can be used by setting some parameters easily. It is listed as follows:
 ```
-# Resampling and Reweighting rate
+# Resampling rate
 # RS=1 means no Resampling
-# RW=0 means no Reweighting
 RS_EXP = 0.3
-RW_EXP = 0
 # Model_path is the checkpoint path of pretrained model,If it is empty, the bert-uncased-base(From Huggingface Transformer) model will be used.
 Model_path = '../checkpoint/epoch_2'
 # EPOCH_NUM is number of epochs
@@ -37,29 +35,31 @@ RW_EXP = 0
 ```
 When you want to fine-tune original BERT with resampling strategy, you can set the ```RS_EXP```.
 
+The same file content for **RS/fine_tune.py** and **FP_and_RS/fine_tune.py**.
+
 
 
 ## Further-Pretrain
-**further_pretrain.py** is adapted from this file [run_mlm_no_trainer.py](https://github.com/huggingface/transformers/blob/master/examples/pytorch/language-modeling/run_mlm_no_trainer.py).
+**FP_and_RS/further_pretrain.py** is adapted from this file [run_mlm_no_trainer.py](https://github.com/huggingface/transformers/blob/master/examples/pytorch/language-modeling/run_mlm_no_trainer.py).
 
 the document for this script in [Language model training](https://github.com/huggingface/transformers/tree/master/examples/pytorch/language-modeling)
 
 
 
 ## Evaluate For CSC task
-**evaluate_csc.ipynb** is the implementation for evaluating a model's perfomance for CSC task.
+**Evaluate/Evaluate_CSC_task.ipynb** is the implementation for evaluating a model's perfomance for CSC task.
 
 You can set the model which you want to evaluate.
 
 
 ## Evaluate For OSC task
 
-**evaluate_osc.ipynb** is the implementation for evaluating a model's perfomance for OSC task.
+**Evaluate/Evaluate_OSC_task.ipynb** is the implementation for evaluating a model's perfomance for OSC task.
 
 You can set the model which you want to evaluate.
 
 ## Evaluate For OSV task
-**evaluate_osv.ipynb** is the implementation for evaluating a model's perfomance for OSV task.
+**Evaluate/Evaluate_OSV_task.ipynb** is the implementation for evaluating a model's perfomance for OSV task.
 
 You can set the model which you want to evaluate.
 
