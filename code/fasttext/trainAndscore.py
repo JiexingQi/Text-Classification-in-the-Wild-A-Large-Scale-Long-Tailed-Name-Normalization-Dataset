@@ -2,20 +2,13 @@ import fasttext
 from tqdm import tqdm_notebook as tqdm
 import pickle
 from sklearn.metrics import f1_score, accuracy_score, precision_score, recall_score
-e_num = 20
-lr_num = 0.5
-trainpath='newtrain.txt'
-devpath='newdev.txt'
-testpath='newtest.txt'
-thread_num = 30
-nor2len_path = "/home/datamerge/ACL/Data/210422/pkl/210422_nor2len_dict.pkl"
-num2nor_path =  "num2label.pkl"
+from config import *
 
-model = fasttext.train_supervised(input=trainpath,thread = thread_num,epoch=e_num,lr=lr_num) ##训练模型
-model.save_model("fasttext{}epoch{}lr.bin".format(e_num,lr_num))
+model = fasttext.train_supervised(input=newtrainpath,thread = thread_num,epoch=e_num,lr=lr_num) ##train model
+model.save_model("fasttext{}epoch{}lr.bin".format(e_num,lr_num))  ## save model
 model = fasttext.load_model("fasttext{}epoch{}lr.bin".format(e_num,lr_num))
 nor2len = pickle.load(open(nor2len_path, 'rb'))
-num2nor = pickle.load(open(num2nor_path, 'rb'))
+num2nor = pickle.load(open(num2labelpath, 'rb'))
 
 def get_diff(h2m, m2l, real_result,predict_result):
     real_h= []
@@ -54,8 +47,8 @@ def getscore(path):
 
 
 
-a1,p1,r1,f1 = getscore(devpath)
-a2,p2,r2,f2 = getscore(testpath)
+a1,p1,r1,f1 = getscore(newdevpath)
+a2,p2,r2,f2 = getscore(newtestpath)
 
 
 with open('fasttext{}epoch{}lr.txt'.format(e_num,lr_num),'w') as fi:

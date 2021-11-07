@@ -1,19 +1,12 @@
 from tqdm import tqdm_notebook as tqdm
 import pickle
+from config import *
 
-trainpath='/home/datamerge/ACL/Data/210422/train/train_part.txt'
-devpath='/home/datamerge/ACL/Data/210422/dev/dev.txt'
-testpath='/home/datamerge/ACL/Data/210422/test/test.txt'
-newtrainpath='newtrain.txt'
-newdevpath='newdev.txt'
-newtestpath='newtest.txt'
-label2numpath="label2num.pkl"
-num2labelpath="num2label.pkl"
 labels = set()
 label2num = {}
 num2label = {}
 
-def writeNewTXT(path,newpath): #将label变为对应ID并且写入新txt
+def writeNewTXT(path,newpath): #transfrom labels into num
     f = open(newpath,'w')
     with open(path,encoding = 'utf-8') as file:
         lines = file.readlines()
@@ -28,12 +21,12 @@ def writeNewTXT(path,newpath): #将label变为对应ID并且写入新txt
                 f.write('\n')
     f.close()
 
-with open(train_path,encoding = 'utf-8') as file:
+with open(trainpath,encoding = 'utf-8') as file:
     lines = file.readlines()
     for line in tqdm(lines):
         words = line.split('\t\t',1)
         words[1] = words[1].replace('\n','')
-        labels.add(words[1])     #读入标签和特征
+        labels.add(words[1])
 labels = list(labels)
 
 for i in range(len(labels)): 
@@ -41,8 +34,8 @@ for i in range(len(labels)):
     num2label[i] = labels[i]
     
 pickle.dump(label2num,open(label2numpath,'wb'))
-pickle.dump(num2label,open(num2labelpath,'wb'))  #做标签数字映射并写入文件
+pickle.dump(num2label,open(num2labelpath,'wb'))  #write mapping file
 
-writeNewTXT(train_path,newtrainpath)
+writeNewTXT(trainpath,newtrainpath)
 writeNewTXT(devpath,newdevpath)
 writeNewTXT(testpath,newtestpath)
