@@ -1,1 +1,2 @@
-Please run Dataprocess.py before train
+提供了ipynb和py两种形式
+在训练模型前请先预处理数据
